@@ -3,7 +3,7 @@ import CartWidget from './CartWidget';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../img/dice-club-logo.png';
 
-const Navbar = () => {
+const NavBar = () => {
   return (
     <div>
       <nav className="navbar navbar-light bg-light">
@@ -48,4 +48,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavBar;

@@ -19,18 +19,18 @@ import { useParams } from 'react-router-dom';
 export const ItemListContainer = () => {
     const [productos, setProductos] = useState([])
 
-    const { idCategory } = useParams()
+    const { idDistributor } = useParams()
 
     useEffect(() => {
-        getProducts(idCategory)
+        getProducts(idDistributor)
             .then(res => setProductos(res))
             .catch(err => console.error(err))
-    }, [idCategory])
+    }, [idDistributor])
 
 
     return (
         <>
-            <h1>{idCategory ? <>Categoria:{idCategory}</> : <>Pagina Principal</>}</h1>
+            <h1>{idDistributor ? <>Distribuidor:{" " + idDistributor}</> : <>Pagina Principal</>}</h1>
             {productos ? <ItemList productos={productos} /> : <div>Cargando...</div>}
         </>
     )

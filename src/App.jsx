@@ -16,7 +16,7 @@
 import { ItemListContainer } from './components/ItemListContainer';
 import NavBar from './components/NavBar';
 import { Error404 } from './components/Error404';
-
+import { ItemDetailContainer } from "./components/ItemDetailContainer";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 function App() {
@@ -27,8 +27,9 @@ function App() {
         <NavBar />
         <Routes>
           <Route path='/' element={<ItemListContainer />} />
-          <Route path='/category/:idCategory' element={<ItemListContainer />} />
+          <Route path='/distributor/:idDistributor' element={<ItemListContainer />} />
           <Route path='/redes' element={<h1>Instagram @coder</h1>} />
+          <Route path='/item/:itemId' element={<ItemDetailContainer />} />
           <Route path='*' element={<Error404 />} />
         </Routes>
       </BrowserRouter>

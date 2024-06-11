@@ -1,0 +1,11 @@
+.link{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    padding: 0px 10px;
+}
+
+.distributor-list{
+    display: flex;
+    justify-content: space-between;
+}

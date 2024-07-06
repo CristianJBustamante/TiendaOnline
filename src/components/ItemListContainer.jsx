@@ -13,8 +13,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { ItemList } from './ItemList';
-import { getProducts } from '../data/asyncmock';
 import { useParams } from 'react-router-dom';
+import { getDocs,  collection, query, where, limit } from 'firebase/firestore';
+import { db } from '../firebase/client';
 
 export const ItemListContainer = () => {
     const [productos, setProductos] = useState([])
@@ -22,9 +23,19 @@ export const ItemListContainer = () => {
     const { idDistributor } = useParams()
 
     useEffect(() => {
-        getProducts(idDistributor)
-            .then(res => setProductos(res))
-            .catch(err => console.error(err))
+
+
+        const filterProducts = idDistributor ? query(
+            collection(db,"productos"),
+            where("distributor", "==", idDistributor),
+            limit(10)
+        ) : collection(db,"productos");
+
+        getDocs(filterProducts).then((snapshot) => {
+            setProductos(snapshot.docs.map((doc)=>({ id: doc.id, ...doc.data()})));
+        })
+
+
     }, [idDistributor])
 
 

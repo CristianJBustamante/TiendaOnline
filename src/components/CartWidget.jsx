@@ -1,17 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { CartContext } from '../context/CartContext';
+import { Link } from 'react-router-dom';
 
 const CartWidget = () => {
-  const cartItemCount = 5; // Número hardcodeado
+  const { cartQuantity } = useContext(CartContext);
 
   return (
-    <div className="cart-widget position-relative">
+    <Link to="/cart" className="cart-widget">
       <FaShoppingCart size={24} />
-      <span className="badge bg-danger position-absolute top-0 start-100 translate-middle">
-        {cartItemCount}
-      </span>
-    </div>
+      {cartQuantity > 0 && <span className="cart-count">{cartQuantity}</span>}
+    </Link>
   );
 };
 

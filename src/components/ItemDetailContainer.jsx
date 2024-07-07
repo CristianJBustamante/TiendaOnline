@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getDocs, collection, query, where, limit } from 'firebase/firestore';
-import { db } from '../firebase/client';
-import ItemDetail from './ItemDetail'; // Importar el componente ItemDetail
+import { getProducts } from '../data/asyncmock';
+import ItemDetail from './ItemDetail';
 
 const ItemDetailContainer = () => {
   const { itemId } = useParams();
@@ -10,19 +9,14 @@ const ItemDetailContainer = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const filterProducts = query(
-      collection(db, "productos"),
-      where("id", "==", parseInt(itemId)),
-      limit(1)
-    );
-
-    getDocs(filterProducts)
-      .then((snapshot) => {
-        const products = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        const selectedItem = products[0];
+    getProducts().then((products) => {
+      const selectedItem = products.find((product) => product.id === itemId);
+      if (selectedItem) {
         setItem(selectedItem);
-      })
-      .catch((err) => setError(err.message));
+      } else {
+        setError('Item not found');
+      }
+    });
   }, [itemId]);
 
   return (
@@ -30,7 +24,7 @@ const ItemDetailContainer = () => {
       {error ? (
         <p>{error}</p>
       ) : item ? (
-        <ItemDetail item={item} /> // Usar el componente ItemDetail
+        <ItemDetail item={item} />
       ) : (
         <p>Cargando...</p>
       )}

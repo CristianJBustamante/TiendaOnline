@@ -1,3 +1,47 @@
 img{
     width: 150px;
+
+}
+
+/* Item.css */
+
+.contenedor {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 16px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    height: 100%;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.card button {
+    margin-top: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .contenedor {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .contenedor {
+        grid-template-columns: 1fr;
+    }
 }
